@@ -223,7 +223,7 @@ namespace glTF2 {
 
         const auto uri = b.GetURI();
         const auto relativeUri = uri.substr(uri.find_last_of("/\\") + 1u);
-        obj.AddMember("uri", Value(relativeUri, w.mAl).Move(), w.mAl);
+        obj.AddMember("uri", Value(relativeUri.c_str(), w.mAl).Move(), w.mAl);
     }
 
     inline void Write(Value& obj, BufferView& bv, AssetWriter& w)
@@ -254,7 +254,7 @@ namespace glTF2 {
         //basisu: no need to handle .ktx2, .basis, write as is
         if (img.bufferView) {
             obj.AddMember("bufferView", img.bufferView->index, w.mAl);
-            obj.AddMember("mimeType", Value(img.mimeType, w.mAl).Move(), w.mAl);
+            obj.AddMember("mimeType", Value(img.mimeType.c_str(), w.mAl).Move(), w.mAl);
         }
         else {
             std::string uri;
@@ -267,7 +267,7 @@ namespace glTF2 {
                 uri = img.uri;
             }
 
-            obj.AddMember("uri", Value(uri, w.mAl).Move(), w.mAl);
+            obj.AddMember("uri", Value(uri.c_str(), w.mAl).Move(), w.mAl);
         }
     }
 
@@ -380,7 +380,7 @@ namespace glTF2 {
         }
 
         if (m.alphaMode != "OPAQUE") {
-            obj.AddMember("alphaMode", Value(m.alphaMode, w.mAl).Move(), w.mAl);
+            obj.AddMember("alphaMode", Value(m.alphaMode.c_str(), w.mAl).Move(), w.mAl);
         }
 
         if (m.doubleSided) {
@@ -894,10 +894,10 @@ namespace glTF2 {
     {
         Value asset;
         asset.SetObject();
-        asset.AddMember("version", Value(mAsset.asset.version, mAl).Move(), mAl);
-        asset.AddMember("generator", Value(mAsset.asset.generator, mAl).Move(), mAl);
+        asset.AddMember("version", Value(mAsset.asset.version.c_str(), mAl).Move(), mAl);
+        asset.AddMember("generator", Value(mAsset.asset.generator.c_str(), mAl).Move(), mAl);
         if (!mAsset.asset.copyright.empty())
-            asset.AddMember("copyright", Value(mAsset.asset.copyright, mAl).Move(), mAl);
+            asset.AddMember("copyright", Value(mAsset.asset.copyright.c_str(), mAl).Move(), mAl);
         mDoc.AddMember("asset", asset, mAl);
     }
 

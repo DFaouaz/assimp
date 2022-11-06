@@ -1,3 +1,9 @@
+**/[Bb]in-int/
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.sln
+
 .idea
 build
 .project
